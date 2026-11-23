@@ -42,7 +42,6 @@ The broader question is **oversight-contingent compliance**: whether reliable co
 ## Reproduce from included data
 
 Python 3.12 was used. Node.js 18+ is needed only for the JavaScript interaction check.  
-```
 
 The scripts use saved data and local statistical models. They do not make Qwen or Tinker calls, and no model weights are downloaded.  
 To re-extract features from the original lab exports:
