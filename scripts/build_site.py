@@ -24,9 +24,10 @@ def render(metrics, records, notes):
     payload = {'games':metrics, 'notes':records, 'analysis':result,
         'surrogate':json.loads((ROOT/'results/communication_surrogate.json').read_text()),
         'surrogate_extraction':json.loads((ROOT/'results/surrogate_extraction.json').read_text()),
-        'source_category_counts':dict(Counter(r['stated_response'] for r in notes))}
+        'source_category_counts':dict(Counter(r['stated_response'] for r in notes)),
+        'observability':json.loads((ROOT/'results/observability_inventory.json').read_text())}
     image='data:image/png;base64,'+base64.b64encode((ROOT/'site/assets/catanist-interface.png').read_bytes()).decode()
-    logo='data:image/svg+xml;base64,'+base64.b64encode((ROOT/'site/assets/duke-university-display.svg').read_bytes()).decode()
+    logo='data:image/png;base64,'+base64.b64encode((ROOT/'site/assets/trust-lab-logo.png').read_bytes()).decode()
     fonts=[]
     for file,family,weight,style in [
         ('LiberationSans-Regular.ttf','Observation Sans',400,'normal'),
@@ -36,7 +37,7 @@ def render(metrics, records, notes):
         ('LiberationSerif-Italic.ttf','Observation Serif',400,'italic')]:
         encoded=base64.b64encode((ROOT/'site/assets/fonts'/file).read_bytes()).decode()
         fonts.append(f"@font-face{{font-family:'{family}';font-style:{style};font-weight:{weight};font-display:swap;src:url(data:font/ttf;base64,{encoded}) format('truetype')}}")
-    html = (ROOT/'site/template.html').read_text().replace('__GAME_IMAGE__',image).replace('__DUKE_LOGO__',logo).replace('__EMBEDDED_FONTS__','\n'.join(fonts)).replace('__RESEARCH_DATA__', json.dumps(payload, ensure_ascii=False).replace('</', '<\\/'))
+    html = (ROOT/'site/template.html').read_text().replace('__GAME_IMAGE__',image).replace('__TRUST_LOGO__',logo).replace('__EMBEDDED_FONTS__','\n'.join(fonts)).replace('__RESEARCH_DATA__', json.dumps(payload, ensure_ascii=False).replace('</', '<\\/'))
     (ROOT/'site/index.html').write_text(html)
     print(json.dumps({'games':len(metrics),'notes':len(records),'html_bytes':len(html.encode())}))
 

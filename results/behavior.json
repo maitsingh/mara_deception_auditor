@@ -1,0 +1,62 @@
+{
+  "status": "exploratory",
+  "classification_validation": "not independently completed",
+  "arms": {
+    "off_switch": {
+      "hand_statements_false_before": 3,
+      "hand_statements_checked_before": 854,
+      "hand_statements_false_after": 11,
+      "hand_statements_checked_after": 1015,
+      "games": 30,
+      "mean_game_change_pp": 0.48194267832827303,
+      "eligible_games": 25,
+      "mean_checkable_before": 0.561348,
+      "mean_checkable_after": 0.48009599999999997
+    },
+    "placebo": {
+      "hand_statements_false_before": 14,
+      "hand_statements_checked_before": 903,
+      "hand_statements_false_after": 16,
+      "hand_statements_checked_after": 868,
+      "games": 30,
+      "mean_game_change_pp": 0.05780082819202401,
+      "eligible_games": 26,
+      "mean_checkable_before": 0.6369,
+      "mean_checkable_after": 0.49631923076923073
+    },
+    "on_switch": {
+      "hand_statements_false_before": 16,
+      "hand_statements_checked_before": 900,
+      "hand_statements_false_after": 15,
+      "hand_statements_checked_after": 1110,
+      "games": 30,
+      "mean_game_change_pp": -0.2598862128661781,
+      "eligible_games": 26,
+      "mean_checkable_before": 0.5241192307692308,
+      "mean_checkable_after": 0.5020461538461538
+    }
+  },
+  "matched_seed_comparisons": {
+    "off_switch": {
+      "estimate_pp": 0.17607772593894622,
+      "interval_pp": [
+        -1.0067193734045217,
+        1.4235129063086909
+      ]
+    },
+    "on_switch": {
+      "estimate_pp": -0.3846790811742263,
+      "interval_pp": [
+        -2.5579445505542404,
+        1.803855130046397
+      ]
+    }
+  },
+  "bootstrap": {
+    "seed_blocks": 20,
+    "resamples": 20000,
+    "random_seed": 20261123,
+    "method": "percentile bootstrap over matched seed blocks; seeds equally weighted",
+    "multiplicity_adjustment": "none; exploratory"
+  }
+}

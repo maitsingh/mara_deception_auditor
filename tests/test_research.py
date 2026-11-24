@@ -31,6 +31,18 @@ class ResearchChecks(unittest.TestCase):
   self.assertEqual(sum(int(r['tagged_response']) for r in rows),8746)
   self.assertNotIn('private',rows[0])
   self.assertEqual(len({(r['run'],r['event_index']) for r in rows}),len(rows))
+ def test_measurement_and_inventory(self):
+  rows=read_csv('data/source/game_metrics.csv')
+  false=[int(r['hand_statements_false_before'])+int(r['hand_statements_false_after']) for r in rows]
+  d=json.loads((ROOT/'results/observability_inventory.json').read_text())
+  self.assertEqual(d['runs'],90)
+  self.assertEqual(d['own_resource_false_claims']['games_with_zero'],sum(x==0 for x in false))
+  self.assertEqual(d['own_resource_false_claims']['total'],sum(false))
+  self.assertEqual(d['event_fields']['post_setup_prompted_events'],29147+6554)
+  self.assertEqual(len(d['reasoning_delimiter_examples']),d['event_fields']['raw_with_think_delimiter'])
+  s=(ROOT/'site/index.html').read_text()
+  self.assertTrue('not 58.2% accuracy' in s,'AUROC must not be described as classification accuracy')
+  self.assertTrue('does not explain the 75 false classifications' in s,'Targets must be distinguished')
  def test_site_and_poster(self):
   s=(ROOT/'site/index.html').read_text()
   self.assertNotIn('__GAME_IMAGE__',s)
@@ -43,5 +55,5 @@ class ResearchChecks(unittest.TestCase):
   self.assertNotIn('__EMBEDDED_FONTS__',s)
   self.assertNotIn('__DUKE_LOGO__',s)
   self.assertIn('Observation Sans',s)
-  self.assertIn('width="24in" height="32in"',(ROOT/'poster/Under_Observation_Poster_24x32.svg').read_text()[:200])
+  self.assertIn('width="24in" height="36in"',(ROOT/'poster/Under_Observation_Poster_24x36.svg').read_text()[:200])
 if __name__=='__main__':unittest.main()
