@@ -1,0 +1,18 @@
+{
+  "rows": 29147,
+  "runs": 90,
+  "excluded": {
+    "missing_current_input_fields": 6554
+  },
+  "input_features": [
+    "auditor_active",
+    "turn",
+    "own_score",
+    "wood",
+    "brick",
+    "sheep",
+    "wheat",
+    "ore",
+    "listed_action_count"
+  ]
+}
